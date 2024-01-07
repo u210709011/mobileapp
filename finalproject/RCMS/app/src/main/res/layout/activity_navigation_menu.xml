@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NavigationMenu">
+
+    <FrameLayout
+        android:id="@+id/frame_navigationmenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/tablesbutton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:text="Tables"
+        app:cornerRadius="0dp" />
+
+    <Button
+        android:id="@+id/ongoingordersbutton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:layout_weight="1"
+        android:text="Ongoing Orders"
+        app:cornerRadius="0dp" />
+
+    <Button
+        android:id="@+id/adminpanelbutton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:layout_weight="1"
+        android:text="Admin Panel"
+        app:cornerRadius="0dp" />
+</LinearLayout>
