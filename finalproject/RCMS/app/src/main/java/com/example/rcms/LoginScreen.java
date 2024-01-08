@@ -28,8 +28,13 @@ public class LoginScreen extends AppCompatActivity {
 
                 String enteredUserId = name.getText().toString();
                 String enteredPassword = password.getText().toString();
-                Intent intent = new Intent(LoginScreen.this, NavigationMenu.class);
-                startActivity(intent);
+
+                if (dummyUserId.equals(enteredUserId) && dummyPassword.equals(enteredPassword)){
+                    Intent intent = new Intent(LoginScreen.this, NavigationMenu.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Enter valid username/password", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

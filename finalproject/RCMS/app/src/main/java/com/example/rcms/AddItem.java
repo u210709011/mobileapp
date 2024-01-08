@@ -1,71 +1,61 @@
 package com.example.rcms;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddItem extends AppCompatActivity {
-    private static final int PICK_IMAGE_REQUEST = 1;
 
-    private ImageView itemImageView;
-    private EditText itemNameEditText, itemPriceEditText;
+    private EditText itemNameEditText;
+    private EditText itemPriceEditText;
     private Spinner itemTypeSpinner;
-    private Button addItemButton;
-
-    private final ActivityResultLauncher<String> pickImageLauncher = registerForActivityResult(
-            new ActivityResultContracts.GetContent(),
-            new ActivityResultCallback<Uri>() {
-                @Override
-                public void onActivityResult(Uri result) {
-                    handleImageResult(result);
-                }
-            }
-    );
+    private Button addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
-        itemImageView = findViewById(R.id.additemimage);
         itemNameEditText = findViewById(R.id.additemnameinput);
         itemPriceEditText = findViewById(R.id.additemprice);
         itemTypeSpinner = findViewById(R.id.additemtype);
-        addItemButton = findViewById(R.id.additemaddemploye);
+        addButton = findViewById(R.id.additemaddbutton);
 
-        itemImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openGallery();
-            }
-        });
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.item_types,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        itemTypeSpinner.setAdapter(adapter);
 
-        addItemButton.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Add logic to handle adding the item to the menu (implement as needed)
-                // For simplicity, just go back to the EditMenu activity
-                finish();
+            public void onClick(View v) {
+                addItem();
             }
         });
     }
 
-    private void openGallery() {
-        pickImageLauncher.launch("image/*");
-    }
+    private void addItem() {
+        String itemName = itemNameEditText.getText().toString();
+        String itemPriceText = itemPriceEditText.getText().toString();
+        String itemType = itemTypeSpinner.getSelectedItem().toString();
 
-    private void handleImageResult(Uri selectedImageUri) {
-        // Handle the selected image from the gallery
-        // For simplicity, set the selected image to the itemImageView
-        itemImageView.setImageURI(selectedImageUri);
+        if (itemName.isEmpty() || itemPriceText.isEmpty()) {
+            return;
+        }
+
+        double itemPrice = Double.parseDouble(itemPriceText);
+
+        OrderItem newItem = new OrderItem(itemName, itemPrice, itemType);
+
+        finish();
     }
 }

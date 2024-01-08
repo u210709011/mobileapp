@@ -1,48 +1,66 @@
 package com.example.rcms;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShoppingCart extends AppCompatActivity {
-    private int tableNumber; // Table number received from the previous activity
 
-    private ListView cartListView;
-    private Button applyButton;
+    private List<OrderItem> cartItems;
+    private ShoppingCartAdapter cartAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
-        if (getIntent().hasExtra("TABLE_NUMBER")) {
-            tableNumber = getIntent().getIntExtra("TABLE_NUMBER", 0);
-        }
+        // Initialize the shopping cart and add some test items
+        cartItems = new ArrayList<>();
+        cartItems.add(new OrderItem("Test Item 1", 5.99, "Test Category"));
+        cartItems.add(new OrderItem("Test Item 2", 8.49, "Test Category"));
+        cartItems.add(new OrderItem("Test Item 3", 12.99, "Test Category"));
 
-        cartListView = findViewById(R.id.listviewshoppingcart);
-        applyButton = findViewById(R.id.shoppingcartok);
+        // Initialize the RecyclerView and its adapter
+        RecyclerView recyclerView = findViewById(R.id.listviewshoppingcart);
+        cartAdapter = new ShoppingCartAdapter(cartItems);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(cartAdapter);
 
-        String[] cartItems = {"Item A - $10.00 - Quantity: 2", "Item B - $15.00 - Quantity: 1"};
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cartItems);
-
-        cartListView.setAdapter(adapter);
-
-        cartListView.setOnItemClickListener((parent, view, position, id) -> {
-            // Add logic to handle item selection in the cart (if needed)
-        });
-
-        // Set a click listener for the "Apply" button
-        applyButton.setOnClickListener(new View.OnClickListener() {
+        // Set onClickListener for the "Apply Order" button
+        Button applyOrderButton = findViewById(R.id.shoppingcartok);
+        applyOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Add logic to apply the changes in the shopping cart
-                // For simplicity, you can go back to the AddOrder activity
-                finish();
+            public void onClick(View v) {
+                // Implement the logic to apply the order
+                applyOrder();
             }
         });
+    }
+
+    private void applyOrder() {
+        // Check if there are items in the shopping cart
+        if (cartItems.isEmpty()) {
+            // Display a message or take appropriate action if the cart is empty
+            return;
+        }
+
+        // Create an Intent to pass the ordered items to the Orders class
+        Intent ordersIntent = new Intent(ShoppingCart.this, Orders.class);
+        ordersIntent.putParcelableArrayListExtra("orderedItems", new ArrayList<>(cartItems));
+
+        // Start the Orders activity
+        startActivity(ordersIntent);
+
+        // Optionally, you can clear the shopping cart or perform any other cleanup
+        cartItems.clear();
+        cartAdapter.notifyDataSetChanged();
+        // Finish the activity (you might want to navigate to another activity or perform other actions)
+        finish();
     }
 }

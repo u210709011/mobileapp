@@ -1,74 +1,79 @@
 package com.example.rcms;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddEmployee extends AppCompatActivity {
-    private static final int PICK_IMAGE_REQUEST = 1;
 
-    private ImageView employeeImageView;
-    private EditText nameEditText, idEditText, passwordEditText, birthdayEditText, addressEditText;
-    private Spinner sexSpinner;
-    private Button addEmployeeButton;
-
-    private final ActivityResultLauncher<String> pickImageLauncher = registerForActivityResult(
-            new ActivityResultContracts.GetContent(),
-            result -> {
-                if (result != null) {
-                    handleImageResult(result);
-                }
-            }
-    );
+    private EditText employeeNameEditText;
+    private EditText employeeIDEditText;
+    private EditText employeePasswordEditText;
+    private Spinner employeeSexSpinner;
+    private EditText employeeBirthdayEditText;
+    private EditText employeeAddressEditText;
+    private Button addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_employee);
 
-        employeeImageView = findViewById(R.id.addemployeeinformationimage);
-        nameEditText = findViewById(R.id.addemployeeinformationname);
-        idEditText = findViewById(R.id.addemployeeinformationid);
-        passwordEditText = findViewById(R.id.addemployeeinformationpassword);
-        birthdayEditText = findViewById(R.id.addemployeeinformationbirthday);
-        addressEditText = findViewById(R.id.addemployeeinformationaddress);
-        sexSpinner = findViewById(R.id.addemployeeinformationsex);
-        addEmployeeButton = findViewById(R.id.addemployee);
+        employeeNameEditText = findViewById(R.id.addemployeeinformationname);
+        employeeIDEditText = findViewById(R.id.addemployeeinformationid);
+        employeePasswordEditText = findViewById(R.id.addemployeeinformationpassword);
+        employeeSexSpinner = findViewById(R.id.addemployeeinformationsex);
+        employeeBirthdayEditText = findViewById(R.id.addemployeeinformationbirthday);
+        employeeAddressEditText = findViewById(R.id.addemployeeinformationaddress);
+        addButton = findViewById(R.id.addemployee);
 
-        employeeImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openGallery();
-            }
-        });
+        // Populate the Spinner with options
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.sex_options,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        employeeSexSpinner.setAdapter(adapter);
 
-        addEmployeeButton.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Add logic to handle adding the employee (implement as needed)
-                // For simplicity, just go back to the EditEmployee activity
-                finish();
+            public void onClick(View v) {
+                addEmployee();
             }
         });
     }
 
-    private void openGallery() {
-        pickImageLauncher.launch("image/*");
-    }
+    private void addEmployee() {
+        String employeeName = employeeNameEditText.getText().toString();
+        String employeeID = employeeIDEditText.getText().toString();
+        String employeePassword = employeePasswordEditText.getText().toString();
+        String employeeSex = employeeSexSpinner.getSelectedItem().toString();
+        String employeeBirthday = employeeBirthdayEditText.getText().toString();
+        String employeeAddress = employeeAddressEditText.getText().toString();
 
-    private void handleImageResult(Uri selectedImageUri) {
-        // Handle the selected image from the gallery
-        // For simplicity, set the selected image to the employeeImageView
-        employeeImageView.setImageURI(selectedImageUri);
+        if (employeeName.isEmpty() || employeeID.isEmpty() || employeePassword.isEmpty() ||
+                employeeSex.isEmpty() || employeeBirthday.isEmpty() || employeeAddress.isEmpty()) {
+            return;
+        }
+
+        Employee newEmployee = new Employee(
+                employeeName,
+                employeeID,
+                employeePassword,
+                employeeSex,
+                employeeBirthday,
+                employeeAddress,
+                0
+        );
+
+        // Add the new employee to your data source or perform any other necessary actions
+        // For example, you might want to save it to a database or update a list of employees
+
+        finish();
     }
 }

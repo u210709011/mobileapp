@@ -16,7 +16,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, String ID, String passsword, String sex, String birthday, String address, int hoursWorked) {
+    public Employee(String name, String ID, String password, String sex, String birthday, String address, int hoursWorked) {
         this.name = name;
         this.ID = ID;
         this.password = password;
@@ -24,7 +24,6 @@ public class Employee {
         this.birthday = birthday;
         this.address = address;
         this.hoursWorked = hoursWorked;
-
     }
 
     public int getHoursWorked() {

@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".AddOrder">
 
 
     <FrameLayout
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/frame_addorder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </FrameLayout>
 
-    <EditText
-        android:id="@+id/editTextSearch"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/addordertoolbar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="0dp"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/addordersearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollViewCategories"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextSearch">
+        android:id="@+id/addorderscroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+            <Button
+                android:id="@+id/addorderallitems"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:text="All"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                app:cornerRadius="0dp"/>
 
             <Button
-                android:id="@+id/appetizers"
+                android:id="@+id/addorderappetizers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -51,18 +57,18 @@
                 app:cornerRadius="0dp" />
 
             <Button
-                android:id="@+id/entrees"
+                android:id="@+id/addorderentrees"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:padding="8dp"
-                android:text="Entress"
+                android:text="Entrees"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:cornerRadius="0dp" />
 
             <Button
-                android:id="@+id/sides"
+                android:id="@+id/addordersides"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -73,7 +79,7 @@
                 app:cornerRadius="0dp" />
 
             <Button
-                android:id="@+id/desserts"
+                android:id="@+id/addorderdesserts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -84,7 +90,7 @@
                 app:cornerRadius="0dp" />
 
             <Button
-                android:id="@+id/beverages"
+                android:id="@+id/addorderbeverages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -98,29 +104,22 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <GridView
-        android:id="@+id/gridViewFoods"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:numColumns="2"
-        android:horizontalSpacing="8dp"
-        android:verticalSpacing="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/horizontalScrollViewCategories"
-        app:layout_constraintBottom_toTopOf="@id/buttonOK"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gridviewaddorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+         />
 
     <Button
-        android:id="@+id/buttonOK"
-        android:layout_width="0dp"
+        android:id="@+id/addordershoppingcartbutton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:padding="16dp"
-        android:text="OK"
+        android:text="Go to Shopping Cart"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:cornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:cornerRadius="0dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

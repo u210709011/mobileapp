@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".EditMenu">
 
     <FrameLayout
         android:id="@+id/frame_editmenu"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </FrameLayout>
-
-    <EditText
-        android:id="@+id/editMenuSearch"
+    
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/editmenutoolbar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frame_editmenu"/>
+        android:layout_height="0dp" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/editmenusearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <HorizontalScrollView
         android:id="@+id/editmenuscroll"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editMenuSearch">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+            <Button
+                android:id="@+id/editmenuallitems"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:text="All"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                app:cornerRadius="0dp" />
 
             <Button
                 android:id="@+id/editmenuappetizers"
@@ -55,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:padding="8dp"
-                android:text="Entress"
+                android:text="Entrees"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:cornerRadius="0dp" />
@@ -97,29 +103,21 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <GridView
-        android:id="@+id/editmenugridview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:numColumns="2"
-        android:horizontalSpacing="8dp"
-        android:verticalSpacing="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editmenuscroll"
-        app:layout_constraintBottom_toTopOf="@id/editmenuadditem"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/editmenurecyclerview"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/editmenuadditem"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:padding="16dp"
         android:text="Add Item"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:cornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:cornerRadius="0dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
