@@ -4,15 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class EditMenuAdapter extends RecyclerView.Adapter<EditMenuAdapter.MenuItemViewHolder> {
@@ -37,8 +32,8 @@ public class EditMenuAdapter extends RecyclerView.Adapter<EditMenuAdapter.MenuIt
     @Override
     public void onBindViewHolder(@NonNull MenuItemViewHolder holder, int position) {
         OrderItem menuItem = menuItems.get(position);
-        holder.menuItemNameEditText.setText(menuItem.getOrderName());
-        holder.menuItemPriceEditText.setText(String.valueOf(menuItem.getOrderPrice()));
+        holder.menuItemNameTextView.setText(menuItem.getOrderName());
+        holder.menuItemPriceTextView.setText(String.valueOf(menuItem.getOrderPrice()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,13 +51,13 @@ public class EditMenuAdapter extends RecyclerView.Adapter<EditMenuAdapter.MenuIt
     }
 
     public class MenuItemViewHolder extends RecyclerView.ViewHolder {
-        TextView menuItemNameEditText;
-        TextView menuItemPriceEditText;
+        TextView menuItemNameTextView;
+        TextView menuItemPriceTextView;
 
         MenuItemViewHolder(View itemView) {
             super(itemView);
-            menuItemNameEditText = itemView.findViewById(R.id.editmenuitemname);
-            menuItemPriceEditText = itemView.findViewById(R.id.editmenuitemprice);
+            menuItemNameTextView = itemView.findViewById(R.id.editmenuitemname);
+            menuItemPriceTextView = itemView.findViewById(R.id.editmenuitemprice);
         }
     }
 
@@ -76,17 +71,6 @@ public class EditMenuAdapter extends RecyclerView.Adapter<EditMenuAdapter.MenuIt
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    public void setMenuCategory(String category) {
-        ArrayList<OrderItem> itemsBasedOnCategory = new ArrayList<>();
-        for (OrderItem item : menuItems) {
-            if (item.getOrderType().equals(category)) {
-                itemsBasedOnCategory.add(item);
-            }
-        }
-
-        this.menuItems = itemsBasedOnCategory;
-        notifyDataSetChanged();
-    }
     public interface OnItemClickListener {
         void onItemClick(OrderItem item);
     }

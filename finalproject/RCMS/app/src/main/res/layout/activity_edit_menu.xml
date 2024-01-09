@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
     </FrameLayout>
-    
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/editmenutoolbar"
         android:layout_width="0dp"
@@ -34,65 +34,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/editmenuallitems"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="1dp"
-                android:backgroundTint="@color/blue"
-                android:text="All"
-                android:textSize="10sp"
-                app:cornerRadius="0dp" />
+                android:layout_weight="1"
+                android:text="All" />
 
-            <Button
-                android:id="@+id/editmenuappetizers"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/editmenucategoriesrecyclerview"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="1dp"
-                android:text="Appetizers"
-                android:backgroundTint="@color/blue"
-                android:textSize="10sp"
-                app:cornerRadius="0dp" />
-
-            <Button
-                android:id="@+id/editmenuentrees"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="1dp"
-                android:backgroundTint="@color/blue"
-                android:text="Entrees"
-                android:textSize="10sp"
-                app:cornerRadius="0dp" />
-
-            <Button
-                android:id="@+id/editmenusides"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/blue"
-                android:layout_marginEnd="1dp"
-                android:text="Sides"
-                android:textSize="10sp"
-                app:cornerRadius="0dp" />
-
-            <Button
-                android:id="@+id/editmenudesserts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/blue"
-                android:layout_marginEnd="1dp"
-                android:text="Desserts"
-                android:textSize="10sp"
-                app:cornerRadius="0dp" />
-
-            <Button
-                android:id="@+id/editmenubeverages"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/blue"
-                android:layout_marginEnd="1dp"
-                android:text="Beverages"
-                android:textSize="10sp"
-                app:cornerRadius="0dp" />
+                android:layout_height="wrap_content"/>
 
 
         </LinearLayout>

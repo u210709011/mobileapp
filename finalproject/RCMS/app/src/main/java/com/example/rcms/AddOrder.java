@@ -11,11 +11,14 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class AddOrder extends AppCompatActivity implements AddOrderAdapter.ItemClickListener {
+public class AddOrder extends AppCompatActivity implements AddOrderAdapter.ItemClickListener,
+        AddOrderCategoriesAdapter.CategoryClickListener {
 
     private List<OrderItem> allMenuItems;
     private List<OrderItem> displayedMenuItems;
@@ -27,6 +30,7 @@ public class AddOrder extends AppCompatActivity implements AddOrderAdapter.ItemC
         setContentView(R.layout.activity_add_order);
 
         RecyclerView recyclerView = findViewById(R.id.gridviewaddorder);
+        RecyclerView categoryRecyclerView = findViewById(R.id.editmenucategoriesrecyclerview);
 
         allMenuItems = createSampleMenuItems();
 
@@ -55,48 +59,14 @@ public class AddOrder extends AppCompatActivity implements AddOrderAdapter.ItemC
             }
         });
 
-        Button buttonAppetizers = findViewById(R.id.addorderappetizers);
-        Button buttonEntrees = findViewById(R.id.addorderentrees);
-        Button buttonSides = findViewById(R.id.addordersides);
-        Button buttonDesserts = findViewById(R.id.addorderdesserts);
-        Button buttonBeverages = findViewById(R.id.addorderbeverages);
+        List<String> categories = getCategoryList();
+        AddOrderCategoriesAdapter categoriesAdapter = new AddOrderCategoriesAdapter(categories, this);
+        categoryRecyclerView.setAdapter(categoriesAdapter);
+
+        LinearLayoutManager categoryLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        categoryRecyclerView.setLayoutManager(categoryLayoutManager);
+
         Button buttonAllItems = findViewById(R.id.addorderallitems);
-
-        buttonAppetizers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoryButtonClick(v);
-            }
-        });
-
-        buttonEntrees.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoryButtonClick(v);
-            }
-        });
-
-        buttonSides.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoryButtonClick(v);
-            }
-        });
-
-        buttonDesserts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoryButtonClick(v);
-            }
-        });
-
-        buttonBeverages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoryButtonClick(v);
-            }
-        });
-
         buttonAllItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +107,20 @@ public class AddOrder extends AppCompatActivity implements AddOrderAdapter.ItemC
         updateDisplayedMenuItems(null);
     }
 
+    @Override
+    public void onItemClick(int position, OrderItem selectedItem) {
+        Intent intent = new Intent(AddOrder.this, ItemInformation.class);
+        intent.putExtra("itemName", selectedItem.getOrderName());
+        intent.putExtra("itemPrice", selectedItem.getOrderPrice());
+        intent.putExtra("itemType", selectedItem.getOrderType());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCategoryClick(String category) {
+        updateDisplayedMenuItems(category);
+    }
+
     private String getCategoryFromButton(View view) {
         return ((Button) view).getText().toString();
     }
@@ -170,12 +154,7 @@ public class AddOrder extends AppCompatActivity implements AddOrderAdapter.ItemC
         addOrderAdapter.setMenuItems(displayedMenuItems);
     }
 
-    @Override
-    public void onItemClick(int position, OrderItem selectedItem) {
-        Intent intent = new Intent(AddOrder.this, ItemInformation.class);
-        intent.putExtra("itemName", selectedItem.getOrderName());
-        intent.putExtra("itemPrice", selectedItem.getOrderPrice());
-        intent.putExtra("itemType", selectedItem.getOrderType());
-        startActivity(intent);
+    private List<String> getCategoryList() {
+        return Arrays.asList("Appetizers", "Entrees", "Sides", "Desserts", "Beverages");
     }
 }

@@ -3,23 +3,25 @@ package com.example.rcms;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import androidx.appcompat.widget.SearchView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class EditMenu extends AppCompatActivity implements EditMenuAdapter.OnItemClickListener {
+public class EditMenu extends AppCompatActivity implements EditMenuAdapter.OnItemClickListener, EditMenuCategoriesAdapter.OnCategoryItemClickListener {
 
     private EditMenuAdapter editMenuAdapter;
+    private EditMenuCategoriesAdapter categoriesAdapter;
     private List<OrderItem> allMenuItems;
     private List<OrderItem> displayedMenuItems;
+    private List<String> allCategories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,55 +30,18 @@ public class EditMenu extends AppCompatActivity implements EditMenuAdapter.OnIte
 
         RecyclerView recyclerView = findViewById(R.id.editmenurecyclerview);
         allMenuItems = createSampleMenuItems();
-        editMenuAdapter = new EditMenuAdapter(allMenuItems, this,this);
+        editMenuAdapter = new EditMenuAdapter(allMenuItems, this, this);
         recyclerView.setAdapter(editMenuAdapter);
         editMenuAdapter.setGridLayout(recyclerView, 2);
         displayedMenuItems = new ArrayList<>(allMenuItems);
 
-        Button buttonDesserts = findViewById(R.id.editmenudesserts);
-        Button buttonSides = findViewById(R.id.editmenusides);
-        Button buttonBeverages = findViewById(R.id.editmenubeverages);
-        Button buttonAppetizers = findViewById(R.id.editmenuappetizers);
-        Button buttonEntrees = findViewById(R.id.editmenuentrees);
         Button buttonAllItems = findViewById(R.id.editmenuallitems);
         Button buttonAddItem = findViewById(R.id.editmenuadditem);
-
-        buttonDesserts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoryButtonClick(v);
-            }
-        });
-        buttonSides.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoryButtonClick(v);
-            }
-        });
-        buttonBeverages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoryButtonClick(v);
-            }
-        });
-        buttonAppetizers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoryButtonClick(v);
-            }
-        });
-
-        buttonEntrees.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoryButtonClick(v);
-            }
-        });
 
         buttonAllItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onAllItemsButtonClick(v);
+                updateDisplayedMenuItems(null);
             }
         });
 
@@ -104,11 +69,13 @@ public class EditMenu extends AppCompatActivity implements EditMenuAdapter.OnIte
                 return true;
             }
         });
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        // Initialize and set up the categories RecyclerView
+        RecyclerView categoriesRecyclerView = findViewById(R.id.editmenucategoriesrecyclerview);
+        allCategories = Arrays.asList("Beverages", "Appetizers", "Entrees", "Sides", "Desserts");
+        categoriesAdapter = new EditMenuCategoriesAdapter(allCategories, this, this);
+        categoriesRecyclerView.setAdapter(categoriesAdapter);
+        categoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 1, RecyclerView.HORIZONTAL, false));
     }
 
     private List<OrderItem> createSampleMenuItems() {
@@ -167,5 +134,10 @@ public class EditMenu extends AppCompatActivity implements EditMenuAdapter.OnIte
         intent.putExtra("itemName", item.getOrderName());
         intent.putExtra("itemPrice", item.getOrderPrice());
         startActivity(intent);
+    }
+
+    @Override
+    public void onCategoryClick(String category) {
+        updateDisplayedMenuItems(category);
     }
 }
