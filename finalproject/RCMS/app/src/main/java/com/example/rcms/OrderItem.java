@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class OrderItem implements Parcelable {
+public class OrderItem implements Parcelable{
 
     private String orderName;
     private double orderPrice;

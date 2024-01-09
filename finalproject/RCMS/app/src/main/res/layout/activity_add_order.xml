@@ -39,11 +39,11 @@
                 android:id="@+id/addorderallitems"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="1dp"
                 android:backgroundTint="@color/blue"
+                android:layout_marginEnd="1dp"
                 android:text="All"
                 android:textSize="10sp"
-                app:cornerRadius="0dp"/>
+                app:cornerRadius="0dp" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/editmenucategoriesrecyclerview"
                 android:layout_width="wrap_content"
