@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="30dp"
     android:orientation="vertical"
     tools:context=".Orders">
 
@@ -16,5 +17,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclervieworders"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightgray" />
 </LinearLayout>

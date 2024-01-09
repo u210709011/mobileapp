@@ -5,16 +5,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginScreen extends AppCompatActivity {
+    ImageView logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
+        logo = findViewById(R.id.llogo);
+
+        int sizedp = 100;
+
+        float scale = getResources().getDisplayMetrics().density;
+        int sizepx = (int) (sizedp * scale + 0.5f);
+
+        ViewGroup.LayoutParams params = logo.getLayoutParams();
+        params.height = sizepx;
+        params.width = sizepx;
+
+        logo.setLayoutParams(params);
+
 
         TextView name = findViewById(R.id.username);
         TextView password = findViewById(R.id.password);

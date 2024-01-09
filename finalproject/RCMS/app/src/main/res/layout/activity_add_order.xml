@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="30dp"
     tools:context=".AddOrder">
 
 
@@ -38,66 +39,60 @@
                 android:id="@+id/addorderallitems"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:layout_marginEnd="1dp"
+                android:backgroundTint="@color/blue"
                 android:text="All"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 app:cornerRadius="0dp"/>
 
             <Button
                 android:id="@+id/addorderappetizers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
                 android:text="Appetizers"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:layout_marginEnd="1dp"
+                android:backgroundTint="@color/blue"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
             <Button
                 android:id="@+id/addorderentrees"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:layout_marginEnd="1dp"
                 android:text="Entrees"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:backgroundTint="@color/blue"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
             <Button
                 android:id="@+id/addordersides"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:layout_marginEnd="1dp"
+                android:backgroundTint="@color/blue"
                 android:text="Sides"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
             <Button
                 android:id="@+id/addorderdesserts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:backgroundTint="@color/blue"
+                android:layout_marginEnd="1dp"
                 android:text="Desserts"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
             <Button
                 android:id="@+id/addorderbeverages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:backgroundTint="@color/blue"
+                android:layout_marginEnd="1dp"
                 android:text="Beverages"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
 
@@ -116,9 +111,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:backgroundTint="@color/orange"
         android:padding="16dp"
         android:text="Go to Shopping Cart"
-        android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:cornerRadius="0dp" />
 

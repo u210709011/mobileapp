@@ -1,4 +1,3 @@
-// AddOrderAdapter.java
 package com.example.rcms;
 
 import android.view.LayoutInflater;
@@ -32,7 +31,6 @@ public class AddOrderAdapter extends RecyclerView.Adapter<AddOrderAdapter.AddOrd
         holder.itemNameTextView.setText(menuItem.getOrderName());
         holder.itemPriceTextView.setText(String.valueOf(menuItem.getOrderPrice()));
 
-        // Set click listener for the whole item view
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

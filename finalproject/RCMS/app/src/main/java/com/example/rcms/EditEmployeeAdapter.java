@@ -13,17 +13,28 @@ public class EditEmployeeAdapter extends RecyclerView.Adapter<EditEmployeeAdapte
 
     private Context context;
     private List<Employee> employeeList;
+    private OnEmployeeClickListener onEmployeeClickListener;
 
-    public EditEmployeeAdapter(Context context, List<Employee> employeeList) {
+    public EditEmployeeAdapter(Context context, List<Employee> employeeList, OnEmployeeClickListener onEmployeeClickListener) {
         this.context = context;
         this.employeeList = employeeList;
+        this.onEmployeeClickListener = onEmployeeClickListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.list_item_editemployee, parent, false);
-        return new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onEmployeeClickListener != null) {
+                    onEmployeeClickListener.onEmployeeClick(viewHolder.getAdapterPosition());
+                }
+            }
+        });
+        return viewHolder;
     }
 
     @Override
@@ -48,7 +59,15 @@ public class EditEmployeeAdapter extends RecyclerView.Adapter<EditEmployeeAdapte
 
             nameTextView = itemView.findViewById(R.id.editemployeename);
             idTextView = itemView.findViewById(R.id.editemployeeid);
-
         }
+        public void onClick(View v) {
+            if (onEmployeeClickListener != null) {
+                onEmployeeClickListener.onEmployeeClick(getAdapterPosition());
+            }
+        }
+    }
+
+    public interface OnEmployeeClickListener {
+        void onEmployeeClick(int position);
     }
 }

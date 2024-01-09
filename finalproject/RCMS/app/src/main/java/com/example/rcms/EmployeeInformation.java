@@ -3,62 +3,74 @@ package com.example.rcms;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class EmployeeInformation extends AppCompatActivity {
-    private ImageView employeeImageView;
-    private TextView nameTextView, idTextView, passwordTextView, birthdayTextView, addressTextView;
-    private Spinner sexSpinner;
-    private Button deleteEmployeeButton, saveEmployeeButton;
+    private EditText employeeNameEditText;
+    private EditText employeeIDEditText;
+    private EditText employeePasswordEditText;
+    private Spinner employeeSexSpinner;
+    private EditText employeeBirthdayEditText;
+    private EditText employeeAddressEditText;
+    private Button addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_information);
 
-        employeeImageView = findViewById(R.id.employeeinformationimage);
-        nameTextView = findViewById(R.id.employeeinformationname);
-        idTextView = findViewById(R.id.employeeinformationid);
-        passwordTextView = findViewById(R.id.employeeinformationpassword);
-        birthdayTextView = findViewById(R.id.employeeinformationbirthday);
-        addressTextView = findViewById(R.id.employeeinformationaddress);
-        sexSpinner = findViewById(R.id.employeeinformationsex);
-        deleteEmployeeButton = findViewById(R.id.deleteemployee);
-        saveEmployeeButton = findViewById(R.id.saveemployee);
+        employeeNameEditText = findViewById(R.id.employeeinformationname);
+        employeeIDEditText = findViewById(R.id.employeeinformationid);
+        employeePasswordEditText = findViewById(R.id.employeeinformationpassword);
+        employeeSexSpinner = findViewById(R.id.employeeinformationsex);
+        employeeBirthdayEditText = findViewById(R.id.employeeinformationbirthday);
+        employeeAddressEditText = findViewById(R.id.employeeinformationaddress);
+        addButton = findViewById(R.id.saveemployee);
 
-        // Dummy data for demonstration, replace with actual data from your database
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("EMPLOYEE_NAME")) {
-            String selectedEmployee = intent.getStringExtra("EMPLOYEE_NAME");
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.sex_options,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        employeeSexSpinner.setAdapter(adapter);
 
-            nameTextView.setText(selectedEmployee);
-            idTextView.setText("EmployeeID123");  // Replace with actual ID
-            passwordTextView.setText("********");  // Replace with actual password
-            birthdayTextView.setText("01/01/1990");  // Replace with actual birthday
-            addressTextView.setText("123 Main St, City");  // Replace with actual address
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addEmployee();
+            }
+        });
+    }
 
-            // Set a click listener for the "Delete Employee" button
-            deleteEmployeeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // Add logic to delete the employee (implement as needed)
-                    // For simplicity, just go back to the EditEmployee activity
-                    finish();
-                }
-            });
+    private void addEmployee() {
+        String employeeName = employeeNameEditText.getText().toString();
+        String employeeID = employeeIDEditText.getText().toString();
+        String employeePassword = employeePasswordEditText.getText().toString();
+        String employeeSex = employeeSexSpinner.getSelectedItem().toString();
+        String employeeBirthday = employeeBirthdayEditText.getText().toString();
+        String employeeAddress = employeeAddressEditText.getText().toString();
 
-            saveEmployeeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // Add logic to save the changes made to the employee information (implement as needed)
-                    // For simplicity, just go back to the EditEmployee activity
-                    finish();
-                }
-            });
+        if (employeeName.isEmpty() || employeeID.isEmpty() || employeePassword.isEmpty() ||
+                employeeSex.isEmpty() || employeeBirthday.isEmpty() || employeeAddress.isEmpty()) {
+            return;
         }
+
+        Employee newEmployee = new Employee(
+                employeeName,
+                employeeID,
+                employeePassword,
+                employeeSex,
+                employeeBirthday,
+                employeeAddress,
+                0
+        );
+        finish();
     }
 }

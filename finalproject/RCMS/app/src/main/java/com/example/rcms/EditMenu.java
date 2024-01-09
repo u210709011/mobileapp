@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditMenu extends AppCompatActivity {
+public class EditMenu extends AppCompatActivity implements EditMenuAdapter.OnItemClickListener {
 
     private EditMenuAdapter editMenuAdapter;
     private List<OrderItem> allMenuItems;
@@ -28,7 +28,7 @@ public class EditMenu extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.editmenurecyclerview);
         allMenuItems = createSampleMenuItems();
-        editMenuAdapter = new EditMenuAdapter(allMenuItems, this);
+        editMenuAdapter = new EditMenuAdapter(allMenuItems, this,this);
         recyclerView.setAdapter(editMenuAdapter);
         editMenuAdapter.setGridLayout(recyclerView, 2);
         displayedMenuItems = new ArrayList<>(allMenuItems);
@@ -159,5 +159,13 @@ public class EditMenu extends AppCompatActivity {
         }
         displayedMenuItems = new ArrayList<>(filteredItems);
         editMenuAdapter.setMenuItems(displayedMenuItems);
+    }
+
+    @Override
+    public void onItemClick(OrderItem item) {
+        Intent intent = new Intent(EditMenu.this, ItemInformation.class);
+        intent.putExtra("itemName", item.getOrderName());
+        intent.putExtra("itemPrice", item.getOrderPrice());
+        startActivity(intent);
     }
 }

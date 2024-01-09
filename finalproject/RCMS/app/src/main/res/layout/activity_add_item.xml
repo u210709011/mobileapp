@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="30dp"
     tools:context=".AddItem">
 
     <FrameLayout
@@ -145,6 +146,7 @@
             android:id="@+id/additemaddbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange"
             android:layout_gravity="bottom"
             android:text="Add Item"
             app:cornerRadius="0dp" />

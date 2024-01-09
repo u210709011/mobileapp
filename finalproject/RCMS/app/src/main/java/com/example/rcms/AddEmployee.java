@@ -31,7 +31,6 @@ public class AddEmployee extends AppCompatActivity {
         employeeAddressEditText = findViewById(R.id.addemployeeinformationaddress);
         addButton = findViewById(R.id.addemployee);
 
-        // Populate the Spinner with options
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.sex_options,
@@ -70,9 +69,6 @@ public class AddEmployee extends AppCompatActivity {
                 employeeAddress,
                 0
         );
-
-        // Add the new employee to your data source or perform any other necessary actions
-        // For example, you might want to save it to a database or update a list of employees
 
         finish();
     }

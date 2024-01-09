@@ -32,7 +32,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.itemPriceTextView.setText(String.valueOf(item.getOrderPrice()));
         holder.itemQuantityTextView.setText(String.valueOf(item.getOrderQuantity()));
 
-        // Implement increment button click
         holder.incrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +40,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             }
         });
 
-        // Implement decrement button click
         holder.decrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

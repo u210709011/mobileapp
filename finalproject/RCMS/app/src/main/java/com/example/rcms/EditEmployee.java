@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class EditEmployee extends AppCompatActivity {
+public class EditEmployee extends AppCompatActivity implements EditEmployeeAdapter.OnEmployeeClickListener {
 
     private RecyclerView recyclerViewEditEmployee;
     private EditEmployeeAdapter editEmployeeAdapter;
@@ -46,8 +46,16 @@ public class EditEmployee extends AppCompatActivity {
         employeeList.add(employee1);
         employeeList.add(employee2);
 
-        editEmployeeAdapter = new EditEmployeeAdapter(this, employeeList);
+        editEmployeeAdapter = new EditEmployeeAdapter(this, employeeList,this);
 
         recyclerViewEditEmployee.setAdapter(editEmployeeAdapter);
+    }
+
+    @Override
+    public void onEmployeeClick(int position) {
+        Intent intent = new Intent(EditEmployee.this, EmployeeInformation.class);
+        intent.putExtra("employeeName", employeeList.get(position).getName());
+        intent.putExtra("employeeID", employeeList.get(position).getID());
+        startActivity(intent);
     }
 }

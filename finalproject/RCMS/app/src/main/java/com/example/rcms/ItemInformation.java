@@ -2,56 +2,60 @@ package com.example.rcms;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ItemInformation extends AppCompatActivity {
-    private ImageView itemImageView;
-    private TextView itemNameTextView, itemPriceTextView;
+    private EditText itemNameEditText;
+    private EditText itemPriceEditText;
     private Spinner itemTypeSpinner;
-    private Button deleteItemButton, saveItemButton;
+    private Button addButton, deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_information);
 
-        itemImageView = findViewById(R.id.iteminfoimage);
-        itemNameTextView = findViewById(R.id.iteminfonameinput);
-        itemPriceTextView = findViewById(R.id.iteminfoprice);
+        itemNameEditText = findViewById(R.id.iteminfonameinput);
+        itemPriceEditText = findViewById(R.id.iteminfoprice);
         itemTypeSpinner = findViewById(R.id.iteminfotype);
-        deleteItemButton = findViewById(R.id.iteminfodeleteitem);
-        saveItemButton = findViewById(R.id.iteminfoadditem);
+        addButton = findViewById(R.id.iteminfoadditem);
+        deleteButton = findViewById(R.id.iteminfodeleteitem);
 
-        // Dummy data for demonstration, replace with actual data from your database
-        String itemName = "Item A";
-        String itemPrice = "$10.00";
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.item_types,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        itemTypeSpinner.setAdapter(adapter);
 
-        // Display the information of the selected menu item
-        itemNameTextView.setText(itemName);
-        itemPriceTextView.setText(itemPrice);
-
-        // Set a click listener for the "Delete Item" button
-        deleteItemButton.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Add logic to delete the item (implement as needed)
-                // For simplicity, just go back to the EditMenu activity
-                finish();
+            public void onClick(View v) {
+                addItem();
             }
         });
+    }
 
-        // Set a click listener for the "Save Item" button
-        saveItemButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Add logic to save the changes made to the menu item (implement as needed)
-                // For simplicity, just go back to the EditMenu activity
-                finish();
-            }
-        });
+    private void addItem() {
+        String itemName = itemNameEditText.getText().toString();
+        String itemPriceText = itemPriceEditText.getText().toString();
+        String itemType = itemTypeSpinner.getSelectedItem().toString();
+
+        if (itemName.isEmpty() || itemPriceText.isEmpty()) {
+            return;
+        }
+
+        double itemPrice = Double.parseDouble(itemPriceText);
+
+        OrderItem newItem = new OrderItem(itemName, itemPrice, itemType);
+
+        finish();
     }
 }

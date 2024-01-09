@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="30dp"
     tools:context=".AddEmployee">
 
     <FrameLayout
@@ -41,9 +42,9 @@
             <EditText
                 android:id="@+id/addemployeeinformationname"
                 android:layout_width="match_parent"
-                android:textSize="20dp"
-                android:minHeight="48dp"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:textSize="20dp"
                 android:background="@drawable/back"
                 android:inputType="text" />
         </LinearLayout>
@@ -66,9 +67,9 @@
                 android:id="@+id/addemployeeinformationid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/back"
                 android:minHeight="48dp"
-                android:textSize="20dp"
-                android:background="@drawable/back" />
+                android:textSize="20dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -174,17 +175,14 @@
 
     </LinearLayout>
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <Button
+    <Button
         android:id="@+id/addemployee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_weight="1"
-        android:text="Add Employee" /></LinearLayout>
+        android:layout_marginHorizontal="-30dp"
+        android:backgroundTint="@color/orange"
+        android:text="Add Employee"
+        app:cornerRadius="0dp" />
+
 </LinearLayout>

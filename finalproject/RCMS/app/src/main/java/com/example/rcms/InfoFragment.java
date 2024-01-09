@@ -26,7 +26,6 @@ public class InfoFragment extends Fragment {
     private String timeWorked = "";
 
     public InfoFragment() {
-        // Required empty public constructor
     }
 
 

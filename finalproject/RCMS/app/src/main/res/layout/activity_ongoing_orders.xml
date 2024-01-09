@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="30dp"
     tools:context=".OngoingOrders">
 
     <FrameLayout
@@ -21,5 +22,6 @@
         android:id="@+id/recyclerviewongoingorders"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightgray"
         app:layout_constraintTop_toBottomOf="@id/frame_ongoingorders" />
 </androidx.constraintlayout.widget.ConstraintLayout>

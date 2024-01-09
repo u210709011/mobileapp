@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CustomerTable extends AppCompatActivity {
-    private int tableNumber; // Table number received from the previous activity
+    private int tableNumber;
 
     private TextView tableNumberTextView, tableStatusTextView, addOrderButton, viewOrdersButton;
     private Button  settleBillButton;
@@ -18,10 +18,9 @@ public class CustomerTable extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_table);
 
-        // Get the table number from the intent
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("TABLE_NUMBER")) {
-            tableNumber = intent.getIntExtra("TABLE_NUMBER", 0); // 0 is the default value
+            tableNumber = intent.getIntExtra("TABLE_NUMBER", 0);
         }
 
         tableNumberTextView = findViewById(R.id.tableno);

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="30dp"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".EditMenu">
 
@@ -37,66 +38,60 @@
                 android:id="@+id/editmenuallitems"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:layout_marginEnd="1dp"
+                android:backgroundTint="@color/blue"
                 android:text="All"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
             <Button
                 android:id="@+id/editmenuappetizers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:layout_marginEnd="1dp"
                 android:text="Appetizers"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:backgroundTint="@color/blue"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
             <Button
                 android:id="@+id/editmenuentrees"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:layout_marginEnd="1dp"
+                android:backgroundTint="@color/blue"
                 android:text="Entrees"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
             <Button
                 android:id="@+id/editmenusides"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:backgroundTint="@color/blue"
+                android:layout_marginEnd="1dp"
                 android:text="Sides"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
             <Button
                 android:id="@+id/editmenudesserts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:backgroundTint="@color/blue"
+                android:layout_marginEnd="1dp"
                 android:text="Desserts"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
             <Button
                 android:id="@+id/editmenubeverages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="8dp"
+                android:backgroundTint="@color/blue"
+                android:layout_marginEnd="1dp"
                 android:text="Beverages"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 app:cornerRadius="0dp" />
 
 
@@ -117,6 +112,7 @@
         android:padding="16dp"
         android:text="Add Item"
         android:textColor="#FFFFFF"
+        android:backgroundTint="@color/orange"
         android:textSize="18sp"
         app:cornerRadius="0dp" />
 

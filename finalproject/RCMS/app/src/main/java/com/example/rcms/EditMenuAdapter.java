@@ -19,10 +19,12 @@ public class EditMenuAdapter extends RecyclerView.Adapter<EditMenuAdapter.MenuIt
 
     private List<OrderItem> menuItems;
     private Context context;
+    private OnItemClickListener onItemClickListener;
 
-    public EditMenuAdapter(List<OrderItem> menuItems, Context context) {
+    public EditMenuAdapter(List<OrderItem> menuItems, Context context, OnItemClickListener onItemClickListener) {
         this.menuItems = menuItems;
         this.context = context;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -38,7 +40,14 @@ public class EditMenuAdapter extends RecyclerView.Adapter<EditMenuAdapter.MenuIt
         holder.menuItemNameEditText.setText(menuItem.getOrderName());
         holder.menuItemPriceEditText.setText(String.valueOf(menuItem.getOrderPrice()));
 
-        // Add any other binding logic here
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(menuItem);
+                }
+            }
+        });
     }
 
     @Override
@@ -77,5 +86,8 @@ public class EditMenuAdapter extends RecyclerView.Adapter<EditMenuAdapter.MenuIt
 
         this.menuItems = itemsBasedOnCategory;
         notifyDataSetChanged();
+    }
+    public interface OnItemClickListener {
+        void onItemClick(OrderItem item);
     }
 }
